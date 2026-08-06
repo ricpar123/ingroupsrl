@@ -1,6 +1,6 @@
 
-const API_BASE = "http://192.168.100.66:8081/informes";
-const API_URL_PDF = "http://192.168.100.66:8081/informes/pdf/informe/:id";
+const API_BASE = "https://servering-production.up.railway.app";
+const API_URL_PDF = "https://servering-production.up.railway.app/informes/pdf/informe/:id";
 
 
 function obtenerTecnicosSeleccionados() {
@@ -227,7 +227,7 @@ const signaturePad2 = new SignaturePad(canvas2);
             alert(`Ìnforme ${data.numero} guardado correctamente`);
 
             //Abrir PDF pasando el id
-           window.open(`http://localhost:8081/informes/pdf/informe/${informeId}`, "_blank");
+           window.open(`${API_URL_PDF.replace(':id', informeId)}`, "_blank");
             
 
             //limpiar arrats y previews
