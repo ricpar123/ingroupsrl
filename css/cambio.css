@@ -1,0 +1,25 @@
+ /* Botones SweetAlert2 (confirm/deny) */
+    .swal2-confirm.btn-pantalla1{
+      background: #2563eb !important; /* azul */
+    }
+    .swal2-deny.btn-pantalla2{
+      background: #16a34a !important; /* verde */
+    }
+
+    .swal2-confirm.btn-pantalla1:hover{
+      filter: brightness(0.92);
+      transform: translateY(-1px);
+    }
+    .swal2-deny.btn-pantalla2:hover{
+      filter: brightness(0.92);
+      transform: translateY(-1px);
+    }
+
+    .swal2-confirm.btn-pantalla1,
+    .swal2-deny.btn-pantalla2{
+      transition: 0.15s ease;
+      padding: 10px 18px !important;
+      border-radius: 10px !important;
+    }
+
+    

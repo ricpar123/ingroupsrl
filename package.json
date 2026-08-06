@@ -1,0 +1,18 @@
+{
+  "name": "ingroup",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node aplicacion"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "html5-qrcode": "^2.3.8",
+    "http-server": "^14.1.1",
+    "sweetalert2": "^11.26.25"
+  }
+}

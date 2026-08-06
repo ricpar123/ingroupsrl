@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/pdf.css" />
+    <title>PDF del Certificado de Calibracion</title>
+</head>
+<body>
+     <div class="contenedor">
+        <img  src="../assets/logoIngroup.png" alt="Descripción">
+     </div>
+
+
+  <div class="contenedor">
+    
+    <div class="rectangulo" id="titulo">
+      Tabla de Verificacion de Calibracion de Torquimetros
+    </div>
+  </div>
+
+  <div class="datos" id="datos1">
+    <div class="contenedor1">
+      <div><strong>Numero del Certificado:</strong> <span id="numero"></span></div>
+      <div><strong>Fecha:</strong><span id="fecha"></span></div>
+    </div>
+    <br>
+    <div><strong><u>DATOS DEL TORQUIMETRO A CALIBRAR</u></strong></div>
+    <br>
+    <div><strong>MARCA:</strong> <span id="marca"></span></div>
+    <br>
+    <div><strong>RANGO DE TORQUE[Nm]:</strong> <span id="rango"></span></div>
+    <br>
+    <div><strong>NRO DE SERIE:</strong> <span id="serie"></span></div>
+    <br>
+    <div><strong>CLIENTE:</strong> <span id="cliente"></span></div>
+    <br>
+    <div><strong>INSTRUMENTO PADRON:</strong><span id="padron"></span></div>
+    <br>
+    <div><strong>TOLERANCIA [%]:</strong> <span id="tolerancia"></span></div>
+    
+   
+    
+  </div>
+  <h3>Mediciones obtenidas</h3>
+        <table id="tablaPuntos">
+            <thead>
+                <tr>
+                    <th>Nominal</th>
+                    <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+
+  
+
+
+<h3>Resultados</h3>
+    <div>Error absoluto general [Nm]: <span id="eabs"></span></div>
+    <div>Error porcentual general [%]: <span id="epct"></span></div>
+    <div>Resultado Final:<span id="resultado"></span></div>
+    <div class="firma">
+        <strong>Firma del técnico:</strong><br>
+        <img id="firmaImg">
+        <div id="tecnico"></div>
+    </div>    
+
+
+<script src = "../js/pdf_cal.js"></script>
+</body>
+</html>

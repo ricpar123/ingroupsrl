@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <link rel="shortcut icon" href="#">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/listado.css">
+    <title>Clientes</title>
+</head>
+<body>
+  <div class="container mt-4">
+    <div class="card shadow-sm">
+      <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">Gestión de Clientes</h5>
+        <button class="btn btn-light btn-sm" onclick="agregarCliente()">
+            Nuevo Cliente
+        </button>
+      </div>
+      <div class="card-body p-0">
+        <div class="table-responsive">
+          <table class="table table-hover align-middle mb-0">
+            <thead class="table-light">
+              <tr>
+                <th style="width: 30%;">Nombre</th>
+                <th style="width: 25%;">Email1</th>
+                <th style="width: 20%;">Email2</th>
+                <th style="width: 20%;">Email3</th>
+                <th style="width: 20%;">Email4</th>
+                <th style="width: 20%;">Status</th>
+                <th style="width: 25%;" class="text-center">Opciones</th>
+              </tr>
+            </thead>
+            <tbody id="tabla-clientes">
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/bootstrap.bundle.min.js"></script>
+  <script src="/js/listar_clientes.js"></script>
+    
+</body>
+</html>

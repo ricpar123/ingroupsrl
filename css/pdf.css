@@ -1,0 +1,91 @@
+/* Contenedor opcional para asegurar el centrado absoluto */
+  .contenedor {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    padding-top: 20px;
+    border : none;
+    
+  }
+  .contenedor1 {
+    display: flex;
+    gap: 30px;
+    justify-content: left;
+    border: none;
+  }
+  .rectangulo {
+    /* Dimensiones y color */
+    background-color: #b4bab4;
+    width: 700px; /* Ancho deseado */
+    height: 50px; /* Alto deseado */
+    
+    /* Centrado horizontal (cuando no se usa flex en el contenedor) */
+    margin: 0 auto; 
+    
+    /* Padding horizontal interno */
+    padding-left: 20px;
+    padding-right: 20px;
+    
+    
+    /* Ajuste para que el padding no aumente el tamaño total (300px) */
+    box-sizing: border-box; 
+    
+    /* Opcional: centrar contenido dentro del rectángulo */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgb(10, 0, 0);
+    font-family: sans-serif;
+    font-size: 1.0rem;
+  }
+
+  .datos {
+    padding-left: 20px;
+    padding-top: 1rem;
+  }
+
+  .card{
+  
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 16px;
+  margin: 14px 0;
+  box-shadow: 0 10px 30px rgba(0,0,0,.25);
+}
+
+@page {
+            size: A4;
+            margin: 15mm;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            
+        }
+
+        .certificado {
+            width: 210mm;
+            min-height: 297mm;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        
+
+        th, td {
+            border: 1px solid #000;
+            padding: 5px;
+            font-size: 12px;
+            text-align: center;
+        }
+
+
+        .firma {
+            margin-top: 30px;
+        }
+
+        .firma img {
+            width: 200px;
+        }

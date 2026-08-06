@@ -1,0 +1,40 @@
+
+body.home {
+    background-image: url('/img/fachada.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat; 
+}
+
+navbar-logo {
+  height: 40px;
+  width: auto;
+}
+
+.navbar-nav .nav-link.active {
+  background-color: rgba(25, 135, 84, 0.84);
+  border:2px solid #198754;
+  border-radius: 6px;
+  
+}
+
+.navbar-nav .nav-link {
+  border: 2px solid transparent;
+  border-radius: 6px;
+}
+
+
+
+@media (min-width:992px) {
+  .navbar-logo {
+    height: 60px;
+  }
+  .navbar-nav .nav-link.active{
+    padding-top: 8px !important;
+    padding-bottom: 8px !important;
+
+  }
+}
+
+
+

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="#">
+  <link rel="stylesheet" href="/css/login.css">
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <title>Login</title>
+</head>
+<body>
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-2 py-lg-4">
+      <div class="container-fluid px-lg-5">
+        <a class="navbar-brand d-flex align-items-center" href="#">
+          <img src="/assets/logoIngroup.png" alt="Logo" class="navbar-logo">
+        </a>
+        <div class="navbar-nav ms-auto">
+          <a class="nav-link px-lg-3" href="../index.html" >Inicio</a>
+          <a class="nav-link px-lg-3" href="../vistas/empresa.html">Empresa</a>
+          <a class="nav-link px-lg-3 active" aria-current="page" href="../vistas/funcionarios.html" class="activo">Exclusivo Funcionarios</a>
+          <a class="nav-link px-lg-3" href="../vistas/servicios.html">Servicios</a>
+          <a class="nav-link px-lg-3" href= "../vistas/clientes.html">Clientes</a>  
+          <a class="nav-link px-lg-3" href="../vistas/contacto.html">Contacto</a>
+                    
+        </div>
+      </div>
+    </nav> 
+  </header>
+
+  <div class="container vh-100">
+        <div class="row justify-content-center align-items-center h-100">
+            <div class="col-12 col-sm-8 col-md-6 col-lg-4">
+                <div class="login-card shadow-lg p-4">
+                    <h3 class="text-center mb-4">Iniciar Sesión</h3>
+                    
+                    <form id="loginForm">
+                        <!-- Campo de Nombre -->
+                        <div class="mb-3">
+                            <label for="nombre">Nombre</label>
+                            <input type="text" id="nombre" placeholder="nombre" required>
+                        </div>
+                        
+                        <!-- Campo de Contraseña -->
+                        <div class="mb-3">
+                            <label for="password">Clave</label>
+                            <input type="password" id="clave" placeholder="••••••••" autocomplete="off" required>
+                        </div>
+                        
+                        <!-- Botón de Enviar -->
+                        <div class="d-grid">
+                            <button type="button" id="btnIngresar" class="btn btn-primary">Acceder</button>
+                        </div>
+                    </form>
+                    
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+
+  <script src= "/js/login.js"></script> 
+  <script src="/js/bootstrap.bundle.js"></script>
+  
+    
+
+    
+</body>
+</html>
+  
+  
+  
+  
+  
+  
+  
+  <!--
+  
+  <div class="bg-overlay">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-5 col-lg-4">
+          <div class="card login-card p-4 text-white">
+            <div class="card-body">
+              <h3 class="text-center mb-4 fw-bold">Bienvenido</h3>
+                            
+              <div id="loginForm">
+                
+                  <div class="mb-3">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" id="nombre" placeholder="nombre" required>
+                  </div>
+                  <div class="mb-3">
+                    <label for="password">Clave</label>
+                    <input type="password" id="clave" placeholder="********" required>
+                  </div>
+                  <div class="d-grid gap-2">
+                    <button type="button" id="btnIngresar">Ingresar</button>
+                  </div>
+                
+              </div>
+                            
+                            
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+-->
+  
+
+ 
+ 
+        
+    
+  

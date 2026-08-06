@@ -1,0 +1,45 @@
+
+body {
+            /* Reemplaza esta URL con la ruta de tu imagen */
+            background-image: url('../img/sala_directoria.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            min-height: 100vh;
+        }
+        .login-card {
+            background-color: rgba(15, 94, 221, 0.85);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        navbar-logo {
+  height: 40px;
+  width: auto;
+}
+
+.navbar-nav .nav-link.active {
+  background-color: rgba(25, 135, 84, 0.84);
+  border:2px solid #198754;
+  border-radius: 6px;
+  
+}
+
+.navbar-nav .nav-link {
+  border: 2px solid transparent;
+  border-radius: 6px;
+}
+
+
+
+@media (min-width:992px) {
+  .navbar-logo {
+    height: 60px;
+  }
+  .navbar-nav .nav-link.active{
+    padding-top: 8px !important;
+    padding-bottom: 8px !important;
+
+  }
+}

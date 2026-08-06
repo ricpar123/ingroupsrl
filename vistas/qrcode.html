@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stykesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/qrcode.css">
+    <script src="/js/html5-qrcode.min.js"></script>
+    <title>Leer QRcode</title>
+    <style>
+    
+    body { font-family: sans-serif; display: flex; flex-direction: column; 
+            align-items: center; justify-content: center; margin-top: 50px; }
+        #reader { width: 500px; border: 1px solid #ccc; padding: 10px; border-radius: 4px; }
+        #result { margin-top: 20px; font-size: 1.2rem; font-weight: bold; color: green; }   
+   
+    </style>
+</head>
+<body>
+    <div id="tab-qr" class="tab-content">
+        <h2>Lector de Codigo QR</h2>
+    <!-- The scanner will render inside this empty container -->
+        <div id="reader" style="width:680px; max-width: 95vw;"></div>
+    <!-- Container to print out decoded results -->
+        <div id="resultado"></div>
+    </div>
+
+    
+    <script src="/js/qrcode.js"></script>
+ 
+
+</body>
+</html>

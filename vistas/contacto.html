@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/contacto.css">
+  <title>Formulario de Contacto</title>
+</head>
+<body>
+
+  <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-2 py-lg-4">
+            <div class="container-fluid px-lg-5">
+                <a class="navbar-brand d-flex align-items-center" href="#">
+                    <img src="/assets/logoIngroup.png" alt="Logo" class="navbar-logo">
+                </a>
+                <div class="navbar-nav ms-auto">
+                    <a class="nav-link px-lg-3" href="../index.html" >Inicio</a>
+                    <a class="nav-link px-lg-3" href="../vistas/empresa.html">Empresa</a>
+                    <a class="nav-link px-lg-3" href="../vistas/funcionarios.html">Exclusivo Funcionarios</a>
+                    <a class="nav-link px-lg-3" href="../vistas/servicios.html">Servicios</a>
+                    <a class="nav-link px-lg-3" href="../vistas/clientes.html" class="activo">Clientes</a>
+                    <a class="nav-link px-lg-3 active" aria-current="page" href="../vistas/contacto.html">Contacto</a>
+                    
+        </div>
+      </div>
+    </nav>
+  </header> 
+
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="card contact-card overflow-hidden">
+                    <div class="row g-0">
+                        <!-- Columna Izquierda: Información de Contacto -->
+                        <div class="col-md-5 bg-primary p-5 text-white d-flex flex-column justify-content-center">
+                            <h2 class="fw-bold mb-4">Ponte en Contacto</h2>
+                            <p class="mb-4">¿Tienes algun problema con algun equipo? o queja/sugerencia que hacernos?
+                                Escríbenos y te responderemos a la brevedad.</p>
+                            
+                            <ul class="list-unstyled mb-0">
+                                <li class="mb-3">
+                                    <i class="bi bi-geo-alt-fill me-2 fs-4"></i>
+                                    Calle Maria F. Gonzalez 820 c/ Dr. Molinas
+                                    Fdo. de la Mora - Paragauy
+                                </li>
+                                <li class="mb-3">
+                                    <i class="bi bi-telephone-fill me-2 fs-4"></i>
+                                    +595 981 403 850 / 595 981 542 729
+                                </li>
+                                <li class="mb-3">
+                                    <i class="bi bi-envelope-fill me-2 fs-4"></i>
+                                    empresaingroup@gmail.com
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Columna Derecha: Formulario -->
+                        <div class="col-md-7 p-5 bg-white">
+                            <h3 class="fw-bold mb-4 text-dark">Envíanos un mensaje</h3>
+                            
+                            <form>
+                                <div class="mb-3">
+                                    <label for="nombre" class="form-label">Nombre Completo</label>
+                                    <input type="text" class="form-control" id="nombre" placeholder="Tu Nombre">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Correo Electrónico</label>
+                                    <input type="email" class="form-control" id="email" placeholder="nombre@ejemplo.com">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="asunto" class="form-label">Asunto</label>
+                                    <input type="text" class="form-control" id="asunto" placeholder="¿En qué podemos ayudarte?">
+                                </div>
+                                <div class="mb-4">
+                                    <label for="mensaje" class="form-label">Mensaje</label>
+                                    <textarea class="form-control" id="mensaje" rows="4" placeholder="Escribe tu mensaje aquí..."></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary w-100 py-2">Enviar Mensaje</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  
+</body>
+</html>

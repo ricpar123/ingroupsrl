@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/pdf_inf.css" />
+    <title>Informe de Servicios</title>
+    
+</head>
+<body>
+  <div class="pagina-wrap">
+    <div class="hoja">
+      <div class="contenedor">
+        <img  src="../assets/logoIngroup.png" alt="Descripción">
+      </div>
+      <div class="rectangulo">  
+      
+          Maria F. Gonzalez 820 c/ Dr. Molinas
+          Telefonos: (0981) 401 850 / (0981) 542 729
+          e-mail: empresaingroup@gmail.com
+          Fdo. de la Mora - Paraguay
+      
+      </div>
+
+      <div class="rectangulo" id="titulo">INFORME DE SERVICIO TECNICO</div>
+
+      <div class="grid-2">
+        <div class="campo"><b>Nº:</b> <span id="numero"></span></div>
+        <div class="campo"><b>Técnico:</b> <span id="tecnicos"></span></div>
+
+        <div class="campo"><b>Cliente:</b> <span id="cliente"></span></div>
+        <div class="campo"><b>Equipo / Marca:</b> <span id="equipoMarca"></span></div>
+
+        <div class="campo"><b>Modelo / Serie:</b> <span id="modeloSerie"></span></div>
+        <div class="campo"><b>Motivo:</b> <span id="motivo"></span></div>
+
+        <div class="campo"><b>Tipo trabajo:</b> <span id="tipoTrabajo"></span></div>
+        <div class="campo"><b>Presupuesto:</b> <span id="presupuesto"></span></div>
+      </div>
+
+      <div class="grid-3">
+        <div class="campo"><b>Fecha:</b> <span id="fecha"></span></div>
+        <div class="campo"><b>Hora inicio:</b> <span id="horaInicio"></span></div>
+        <div class="campo"><b>Hora término:</b> <span id="horaFin"></span></div>
+      </div>
+
+      <div class="bloque">
+        <h3>Servicio Realizado</h3>
+        <p id="servicio"></p>
+      </div>
+
+      <div class="bloque">
+        <h3>Observaciones</h3>
+        <p id="obs"></p>
+      </div>
+
+    
+
+      <div class="grid-3">
+        <div class="campo"><b>Recibido por:</b> <span id="recibido"></span></div>
+        <div class="campo"><b>Status:</b> <span id="status"></span></div>
+        <div class="campo"><b>Repuestos:</b> <span id="repuesto"></span></div>
+      </div>
+
+      <div class="firmas">
+        <div class="firma-box">
+          <h4>Firma del Cliente</h4>
+          <img id="firmaCliente" alt="Firma Cliente" />
+        </div>
+
+        <div class="firma-box">
+          <h4>Firma del Técnico</h4>
+          <img id="firmaTecnico" alt="Firma Técnico" />
+        </div>
+      </div>
+
+      <div class="bloque">
+        <h3>Links de las fotos tomadas</h3>
+        <ul id="listaLinks"></ul>
+      </div>
+
+      <div class="acciones-pdf">
+        <button type="button" id="btnImprimir">Imprimir / guardar PDF</button>
+        <button type="button" id="btnEnviarEmail">Enviar por Email</button>
+        <button type="button" id="btnAbrirPDF">Abrir PDF</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+    
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <script src="/js/config.js"></script>
+ 
+
+
+
+
+
+    
+</body>
+</html>

@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="shortcut icon" href="#">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/info.css">
+    <title>Informe de Servicio</title>
+   
+</head>
+<body class="bg-light py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-primary text-white py-3">
+                            <h4 class="mb-0">Informe de Servicios</h4>
+                    </div>
+                    <div class="card-body p-4">
+                        <form id="formInforme" class="needs-validation" novalidate>
+                                
+                            <div class="row">
+                                <hr class="my-4">
+                                    <h5 class="text-primary">Datos Generales</h5>
+                                    
+                                <div class="col-12 col-md-6 mb-3">
+
+                                        <label for="clienteSelect" class="form-label fw-semibold">
+                                                Cliente
+                                        </label>
+                                        <div class="input-group">
+                                           <select id="clienteSelect" class="form-select" required>
+                                                <option value="">Seleccione un Cliente</option>
+                                           </select>
+                                           <button type="button" id="btnNuevoCliente" class="btn btn-outline-success">
+                                            Nuevo Cliente
+                                           </button> 
+                                        </div>
+                                </div>
+
+                                <div class="col-12 col-md-6 mb-3">
+                                        <label for="tecnicoSelect" class="form-label fw-semibold">
+                                                    Tecnicos
+                                        </label>
+                                    <div class="input-group">
+                                            <select id="tecnicoSelect" class="form-select">
+                                                <option value="">Seleccione un tecnico</option>
+                                            </select>
+                                        <button
+                                            type="button"
+                                            id="btnAgregarTecnico"
+                                            class="btn btn-success">
+                                                Agregar
+                                        </button>
+                                    
+
+                                        <button type="button" id="btnNuevoTecnico" class="btn btn-outline-success">
+                                        Nuevo Tecnico
+                                        </button>
+                                    </div>
+
+                                        <h4>Tecnicos seleccionados</h4>
+
+                                    <div id="listaTecnicos" class="mt-2"></div>
+                                </div>
+                                <div class="col-12 col-md-6 mb-3">
+                                    <label for="tipoTrabajo" class="form-label fw-semibold">Tipo de trabajo</label>
+                                    <select id="tipoTrabajo" class="form-select" required>
+                                        <option value="">Seleccione...</option>
+                                        <option value="Contrato">Contrato</option>
+                                        <option value="A facturar">A facturar</option>
+                                        <option value="Montaje">Montaje</option>
+                                        <option value="Garantía">Garantía</option>
+                                        <option value="Varios">Varios</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-12 col-md-6 mb-3">
+                                   <label for="motivoVisita" class="form-label fw-semibold">Motivo de la visita</label>
+                                   <input type="text" id="motivoVisita" class="form-control" required>
+                                </div>
+
+                                    <hr class="my-4">
+                                    <h5 class="text-primary">Equipo en Verificacion</h5>
+
+                                <div class="col-12 col-md-6 mb-3">
+                                        <label for="equipo" class="form-label fw-semibold">Tipo de equipo</label>
+                                        <input type="text" id="equipo" class="form-control" required>
+                                </div>
+
+                                <div class="col-12 col-md-6 mb-3">
+                                        <label for="marca" class="form-label fw-semibold">Marca</label>
+                                        <input type="text" id="marca" class="form-control" required>
+                                </div>
+
+
+                                <div class="col-12 col-md-6 mb-3">
+                                        <label for="modelo" class="form-label fw-semibold">Modelo</label>
+                                        <input type="text" id="modelo" class="form-control" required>
+                                </div>
+
+                                <div class="col-12 col-md-6 mb-3">
+                                        <label for="serie" class="form-label fw-semibold">Serie</label>
+                                        <input type="text" id="serie" class="form-control" required>
+                                </div>
+
+                                    <hr class="my-4">
+                                    <h5 class="text-primary">Programacion de trabajos</h5>
+
+                                <div class="col-12 col-md-6 mb-3">
+                                        <label for="fechaInicio" class="form-label fw-semibold">Fecha de Inicio</label>
+                                        <input type="date" id="fechaInicio" class="form-control" required>
+                                </div>
+
+                                <div class="col-12 col-md-6 mb-3">
+                                        <label for="fechaFin" class="form-label fw-semibold">Fecha de termino</label>
+                                        <input type="date" id="fechaTermino" class="form-control" required>
+                                </div>
+
+                                <div class="col-12 col-md-6 mb-3">
+                                        <label for="horaInicio" class="form-label fw-semibold">Hora de Inicio</label>
+                                        <input type="time" id="horaInicio" class="form-control" required>
+                                </div>
+
+                                <div class="col-12 col-md-6 mb-3">
+                                        <label for="fechaFin" class="form-label fw-semibold">Hora de termino</label>
+                                        <input type="time" id="horaTermino" class="form-control" required>
+                                </div>
+
+                                    <hr class="my-4">
+                                    <h5 class="text-primary">Estado Inicial del Equipo</h5>
+                                <div class="col-12 col-md-6 mb-3">
+                                    <button
+                                        type="button"
+                                        id="btnFotoAntes"
+                                        class="btn btn-primary">
+                                                Tomar Foto Antes
+                                    </button>
+                                        <input
+                                            type="file"
+                                            id="fotoAntesInput"  
+                                            accept="image/*"
+                                            hidden>
+                                </div>
+                                    <div id="previewAntes" class="row g-2"></div>
+                                    
+
+                                    <hr class="my-4">
+                                    <h5 class="text-primary">Aspectos Comerciales</h5>
+
+                                <div class="col-12 col-md-6 mb-3">
+                                        <label for="presupuesto" class="form-label fw-semibold">Necesita presupuesto?</label>
+                                        <select id="presupuesto" class="form-select" required>
+                                            <option value="">Seleccione...</option>
+                                            <option value="Si">Si</option>
+                                            <option value="No">No</option>
+                                        </select>
+                                </div>
+                                <div class="col-12 col-md-6 mb-3">
+                                        <label for="Repuestos" class="form-label fw-semibold">Necesita repuestos?</label>
+                                        <select id="repuestos" class="form-select" required>
+                                            <option value="">Seleccione...</option>
+                                            <option value="Si">Si</option>
+                                            <option value="No">No</option>
+                                        </select>
+                                </div>
+
+                                    <hr class="my-4">
+                                    <h5 class="text-primary">Trabajo Realizado</h5>
+
+                                <div class="col-12 col-md-6 mb-3">
+                                        <label for="servicio" class="form-label fw-semibold">Servicio Realizado</label>
+                                        <textarea id="servicio" rows="3" class="form-control" required></textarea>
+                                </div>
+
+                                    <hr class="my-4">
+                                    <h5 class="text-primary">Observaciones</h5>
+
+                                <div class="col-12 col-md-6 mb-3">
+                                        <label for="observaciones" class="form-label fw-semibold">Observaciones</label>
+                                        <textarea id="observaciones" rows="3" class="form-control" required></textarea>
+                                </div>
+
+                                    <hr class="my-4">
+                                    <h5 class="text-primary">Evidencias</h5>
+
+                                <div class="col-12 col-md-6 mb-3">
+                                        <button
+                                            type="button"
+                                            id="btnFotoDespues"
+                                            class="btn btn-success">
+                                               Tomar Foto Despues (max 3)
+                                        </button>
+                                        <input
+                                            type="file"
+                                            id="fotoDespuesInput"
+                                            accept="image/*"
+                                            capture="environment"
+                                            hidden>
+                                </div>
+                                    <div id="previewDespues" class="row g-2"></div>
+
+                                    <hr class="my-4">
+                                    <h5 class="text-primary">Estado Final del Equipo</h5>
+
+                                <div class="col-12 col-md-6 mb-3">
+                                        <label for="situacion" class="form-label fw-semibold">Situacion del Equipo</label>
+                                        <select id="status" class="form-select" required>
+                                            <option value="">Seleccione...</option>
+                                            <option value="operativo">Operativo</option>
+                                            <option value="parcialmente">Operativo Parcialmente</option>
+                                            <option value="No operativo">No Operativo</option>
+                                        </select>
+                                </div>
+
+                                <div class="col-12 col-md-6 mb-3">
+                                        <label for="recibido" class="form-label fw-semibold">Recibido por:</label>
+                                        <input type="text" id="recibido" class="form-control" required>
+                                </div>
+
+                                    <hr class="my-4">
+                                    <h5 class="text-primary">Firmas</h5>
+
+                                <div class="col-12 col-md-6 mb-3" >
+                                        <label class="form-label fw-semibold">Firma del Cliente</label>
+                                        <div class="firma-box">
+                                            <canvas id="firmaClienteCanvas"></canvas>
+                                        </div>
+                                         <input type="text" id="firmaClientebase64" style="opacity: 0; position: absolute; width: 1px; height: 1px; pointer-events: none;">
+                                                                                              
+                                        <button type="button" class="btn btn-secondary btn-sm mt-2" id="btnLimpiarFirmaCliente">
+                                               Limpiar Firma del Cliente 
+                                        </button>
+                                            
+                                </div>
+
+                                <div class="col-12 col-md-6 mb-3" >
+                                        <label class="form-label fw-semibold">Firma del Tecnico</label>
+                                            <div class="firma-box">
+                                                <canvas id="firmaTecnicoCanvas"></canvas>
+                                            </div>
+                                                <!-- Input invisible para la validación -->
+                                                 <input type="text" id="firmaTecnicobase64" required style="opacity: 0; position: absolute; width: 1px; height: 1px; pointer-events: none;">
+                                                <!-- Mensaje de error para Bootstrap (opcional) -->
+                                                <div class="invalid-feedback">Por favor, firme el informe antes de continuar.</div>
+                                                <button type="button" class="btn btn-secondary btn-sm mt-2" id="btnLimpiarFirmaTecnico">
+                                                    Limpiar Firma del Tecnico 
+                                                </button>
+                                </div>
+                                    
+                                        
+                            </div>
+
+                                    <hr>
+                                    <div class="d-grid gap-2">
+                                        <button type="submit" class="btn btn-primary btn-lg">Guardar Información</button>
+                                    </div>
+                                
+                        </form>
+                    </div> <!--div class card body-->
+                </div> <!--div class card shadow-->
+            </div> <!--div class col-->
+        </div> <!--div class rox-->
+    </div>    
+                              
+             <!-- Enlace a la biblioteca Signature Pad (útil para trazos suaves) 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/signature_pad/1.3.5/signature_pad.min.js"></script>-->
+        
+        <script src="/js/bootstrap.bundle.min.js"></script>
+        <script src="/js/info.js"></script>
+
+        
+    
+
+</body>
+</html>

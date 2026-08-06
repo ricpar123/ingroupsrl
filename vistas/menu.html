@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/css/menuOpciones.css">
+        <link rel="shortcut icon" href="#">
+        <title>Menu de Opciones</title>
+    </head>
+    <body>
+        <div class="panel-container">
+
+            <h1>Panel de Funcionarios</h1>
+                <p class="usuario">Bienvenido <span id="usuarioNombre"></span>
+                (<span id="usuarioRol"></span>)</p>
+
+            <div class="menu-grid">
+
+                <button onclick="nuevoInforme()">📄 Elaborar Informe</button>
+
+                <button onclick="listarInformes()">📑 Listar Informes</button>
+
+                <button onclick="listarUsuarios()">👤 Usuarios</button>
+
+                <button onclick="listarClientes()">🏢 Clientes</button>
+
+                <button onclick="nuevoCertificado()">⚙️ Nuevo Certificado</button>
+
+                <button onclick="listarCertificados()">📊 Certificados</button>
+
+            </div>
+
+                <button class="logout" onclick="logout()">Cerrar sesión</button>
+
+            </div>
+    <script src="/js/panel.js"></script>
+    </body>
+</html>
