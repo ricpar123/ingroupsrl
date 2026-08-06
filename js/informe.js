@@ -4,7 +4,7 @@ const API_URL_PDF = "https://servering-production.up.railway.app/informes/pdf/in
 
 
 function obtenerTecnicosSeleccionados() {
-  const select = document.getElementById("tecnicos");
+  const select = document.getElementById("tecnicoSelect");
 
   return Array.from(select.selectedOptions).map(opt => opt.value);
 }
