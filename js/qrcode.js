@@ -14,7 +14,7 @@ function parseQR(texto) {
 
   return {
     cliente: partes[0],
-    descripcion: partes[1],
+    equipo: partes[1],
     marca: partes[2],
     modelo: partes[3],
     serie: partes[4],
@@ -23,6 +23,7 @@ function parseQR(texto) {
 
 document.addEventListener("DOMContentLoaded", () => {
   const onScanSuccess = (decodedText) => {
+    alert("ENTRO EN onScanSuccess");
     console.log("✅ QR LEÍDO:", decodedText);
 
     let data;
@@ -33,12 +34,23 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    sessionStorage.setItem("qr_equipo", JSON.stringify(data));
+    alert(
+      `cliente:${data.cliente}\n` +
+        `equipo:${data.equipo}\n` +
+        `marca:${data.marca}\n` +
+        `modelo:${data.modelo}\n` +
+        `serie:${data.serie}`
+    );
 
+
+
+    sessionStorage.setItem("qr_equipo", JSON.stringify(data));
+/*
     scanner.clear().then(() => {
       window.location.href = "/vistas/informe.html";
     });
-  };
+  */
+    };
 
   const scanner = new Html5QrcodeScanner(
     "reader",

@@ -26,8 +26,10 @@ document.addEventListener("DOMContentLoaded", () => {
     if (el && value != null) el.value = value;
   };
 
-  set("cliente", data.cliente);
-  set("descripcion", data.descripcion);
+  console.log("Datos del QR:", data);
+
+  set("clienteSelect", data.clienteSelect);
+  set("equipo", data.equipo);
   set("marca", data.marca);
   set("modelo", data.modelo);
   set("serie", data.serie);
