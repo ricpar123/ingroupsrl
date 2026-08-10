@@ -10,7 +10,25 @@ function obtenerTecnicosSeleccionados() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  const raw = sessionStorage.getItem("qr_equipo");
+ 
+    const params = new URLSearchParams(window.location.search);
+    const cliente = params.get("cliente");
+    const equipo = params.get("equipo");
+    const marca = params.get("marca");
+    const modelo = params.get("modelo");
+    const serie = params.get("serie");
+
+    if (cliente) document.getElementById("cliente").value = cliente;
+    if (equipo) document.getElementById("equipo").value = equipo;
+    if (marca) document.getElementById("marca").value = marca;
+    if (modelo) document.getElementById("modelo").value = modelo;
+    if (serie) document.getElementById("serie").value = serie;
+
+});
+
+
+    /*
+    const raw = sessionStorage.getItem("qr_equipo");
   if (!raw) return;
 
   let data;
@@ -37,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // usar una sola vez
   sessionStorage.removeItem("qr_equipo");
 });
-
+*/
 let usuarios = [];
 
 async function fetchUsuarios(){

@@ -42,7 +42,8 @@ document.addEventListener("DOMContentLoaded", () => {
         `serie:${data.serie}`
     );
 
-
+const params = new URLSearchParams(data);
+windows.location.href = "/vistas/informe.html?" + params.toString();
 
     sessionStorage.setItem("qr_equipo", JSON.stringify(data));
 
