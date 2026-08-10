@@ -35,20 +35,18 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
+  alert("3 - reader encontrado");
+
   if (typeof Html5QrcodeScanner === "undefined") {
     alert("ERROR: Html5QrcodeScanner NO está definido");
     return;
 }
 
-  alert("3 - reader encontrado"); 
+   
 
-  if(typeof reader !== "undefined") {
-    alert("ERROR: html5qrcodeScanner NO esta definido");
-    return;
-  }  
+   
 
-  alert("4 - html5qrcodeScanne cargado");
-    
+  
 
 
   let qrProcesado = false;
