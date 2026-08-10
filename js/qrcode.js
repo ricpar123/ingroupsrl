@@ -22,35 +22,56 @@ function parseQR(texto) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  const onScanSuccess = (decodedText) => {
+  let qrProcesado;
+
+  const onScanSuccess = async (decodedText) => {
     alert("ENTRO EN onScanSuccess");
+    if(qrProcesado) return;
+    qrProcesado = true;
+
+    alert("✅ QR LEÍDO: " + decodedText);  
+
     console.log("✅ QR LEÍDO:", decodedText);
 
     let data;
     try {
       data = parseQR(decodedText);
     } catch (e) {
+      qrProcesado = false;
       alert(e.message);
       return;
     }
 
     alert(
-      `cliente:${data.cliente}\n` +
-        `equipo:${data.equipo}\n` +
-        `marca:${data.marca}\n` +
-        `modelo:${data.modelo}\n` +
-        `serie:${data.serie}`
+        `✅ Cliente: ${data.cliente}\n` +
+        `✅ Equipo: ${data.equipo}\n` +
+        `✅ Marca: ${data.marca}\n` +
+        `✅ Modelo: ${data.modelo}\n` +
+        `✅ Serie: ${data.serie}`
     );
 
   
    
 
     const params = new URLSearchParams(data);
-    window.location.href = "/vistas/informe.html?" + params.toString();
+
+      try {
+        await scanner.clear();
+        console.log("Scanner cleared.");
+        window.location.assign = ("/vistas/informe.html?" + params.toString());
+      
+      
+      } catch (error) {
+        console.error("Error clearing scanner:", error);
+        window.location.assign = ("/vistas/informe.html?" + params.toString());
+      };
+
+
+    
 
 /*    sessionStorage.setItem("qr_equipo", JSON.stringify(data)); */
 
-    };
+    }
 
   const scanner = new Html5QrcodeScanner(
     "reader",
@@ -64,4 +85,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
   scanner.render(onScanSuccess);
 
-});S
+});
