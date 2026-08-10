@@ -45,11 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     sessionStorage.setItem("qr_equipo", JSON.stringify(data));
-/*
-    scanner.clear().then(() => {
-      window.location.href = "/vistas/informe.html";
-    });
-  */
+
     };
 
   const scanner = new Html5QrcodeScanner(
