@@ -21,17 +21,34 @@ function parseQR(texto) {
   };
 }
 
+alert("1 - QRCODE.JS cargado");
+
 document.addEventListener("DOMContentLoaded", () => {
+
+  alert("2 - DOMContentLoaded ejecutado");
+
+  if(!reader) {
+    alert("3 - reader no encontrado");
+    return;
+  }
+
+  alert("3 - reader encontrado"); 
+
+  if(typeof reader !== "undefined") {
+    alert("ERROR: html5qrcodeScanner NO esta definido");
+    return;
+  }  
+
+  alert("4 - html5qrcodeScanne cargado");
+    
+
+
   let qrProcesado = false;
 
   const onScanSuccess = async (decodedText) => {
     alert("ENTRO EN onScanSuccess");
     if(qrProcesado) return;
     qrProcesado = true;
-
-    alert("✅ QR LEÍDO: " + decodedText);  
-
-    console.log("✅ QR LEÍDO:", decodedText);
 
     let data;
     try {
@@ -42,29 +59,19 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    alert(
-        `✅ Cliente: ${data.cliente}\n` +
-        `✅ Equipo: ${data.equipo}\n` +
-        `✅ Marca: ${data.marca}\n` +
-        `✅ Modelo: ${data.modelo}\n` +
-        `✅ Serie: ${data.serie}`
-    );
-
-  
-   
+    
 
     const params = new URLSearchParams(data);
 
       try {
         await scanner.clear();
-        console.log("Scanner cleared.");
-        window.location.assign = ("/vistas/informe.html?" + params.toString());
-      
       
       } catch (error) {
         console.error("Error clearing scanner:", error);
-        window.location.assign = ("/vistas/informe.html?" + params.toString());
+        
       }
+
+      window.location.assign = ("/vistas/informe.html?" + params.toString());
 
 
     
@@ -73,16 +80,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
     };
 
-  const scanner = new Html5QrcodeScanner(
-    "reader",
-    {
-      fps: 10,
-      qrbox: { width: 300, height: 300 }, // 🔴 CLAVE
-      rememberLastUsedCamera: true,
-    },
-    false
-  );
+    let scanner;
 
-  scanner.render(onScanSuccess);
+    try {
+      scanner = new Html5QrcodeScanner(
+        "reader",
+        {
+          fps: 10,
+          qrbox: { width: 300, height: 300 },
+          rememberLastUsedCamera: true,
+        },
+        false
+      );
+      alert("5 - Scanner creado");
+      scanner.render(onScanSuccess);
+      alert("6 - scanner.render ejecutado");
+    } catch (error) {
+      
+      alert("Error initializing scanner: " + error.message);
+    };
 
 });
