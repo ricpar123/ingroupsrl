@@ -2,6 +2,8 @@
 
 /* global Html5QrcodeScanner */
 
+alert("0 - QRCODE.JS cargado");
+
 function parseQR(texto) {
   const partes = texto
     .split(/\r?\n/)
@@ -19,6 +21,7 @@ function parseQR(texto) {
     modelo: partes[3],
     serie: partes[4],
   };
+
 }
 
 alert("1 - QRCODE.JS cargado");
