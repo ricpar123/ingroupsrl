@@ -1,5 +1,5 @@
 
-const API_BASE = "https://servering-production.up.railway.app";
+const API_BASE = "http://localhost:8081";
 const API_URL_PDF = "https://servering-production.up.railway.app/informes/pdf/informe/:id";
 
 
@@ -39,11 +39,11 @@ document.addEventListener("DOMContentLoaded", () => {
 let usuarios = [];
 
 async function fetchUsuarios(){
-   
-    const res = await fetch(API_BASE/usuarios, 
+   console.log("fetchUsuarios ejecutado");
+    const res = await fetch(`${API_BASE}/usuarios`, 
         {
-            method: "GET",
-            
+            method: "GET"
+           
             });
     
     if(!res.ok){
@@ -70,120 +70,147 @@ async function fetchUsuarios(){
 
 fetchUsuarios();
 
+async function fetchClientes(){
+   
+    const res = await fetch('http://localhost:8081/clientes', 
+        {
+            method: "GET",
+            headers: {"auth": "auth"}
+            });
     
+
+   
     
-const wrapper1 = document.getElementById("signature1");
-const canvas1 = wrapper1.querySelector("canvas");
-    
-
-const wrapper2 = document.getElementById("signature2");
-const canvas2 = wrapper2.querySelector("canvas");
-
-//Crear Signatures
-
-const SignaturePad = window.SignaturePad;
-
-const signaturePad1 = new SignaturePad(canvas1);
-const signaturePad2 = new SignaturePad(canvas2);
-
-    function resizeCanvas(wrapper, canvas, signaturePad) {
-        const ratio = Math.max(window.devicePixelRatio || 1, 1);
-        const rect = wrapper.getBoundingClientRect();
-        const preWidth = canvas.width;
-        const preHeight = canvas.height;
-        // sino cambio realmente el tamaño, no hacer nada
-        const nextWidth = Math.round(rect.width * ratio);
-        const nextHeight = Math.round(rect.height * ratio);
-
-        if(preWidth === nextWidth && preHeight === nextHeight) {
-            return;
-        }
-
-        //guardar imagen actual antes de redimensionar
-        let dataUrl = "";
-        if(!signaturePad.isEmpty()) 
-            { 
-                dataUrl = signaturePad.toDataURL("image/png");
-
-            }
-            //Ajustar tamaño real del canvas
-            canvas.width = nextWidth;
-            canvas.height = nextHeight;
-            //Ajustar tamaño visual tambien
-            const ctx = canvas.getContext("2d");
-            ctx.setTransform(1,0,0,1,0,0);
-            ctx.scale(ratio, ratio);
-            
-            //Restaurar firma, si existia
-            if (dataUrl) {
-                const img = new Image();
-                img.onload = () => {
-                    ctx.drawImage(img, 0, 0, rect.width, rect.height);
-                };
-                img.src = dataUrl;
-            } else {
-                signaturePad.clear();
-
-            }
-
-        
-        console.log("resizeCanvas ejecutado");
+    if(!res.ok){
+        const msg = `error en fetchClientes:, ${res.status}`;
+        throw new Error(msg);
     }
 
-    window.addEventListener("load", () => {
-    resizeCanvas(wrapper1, canvas1, signaturePad1);
-    resizeCanvas(wrapper2, canvas2, signaturePad2);
-    console.log("resizeCanvas addListenerLoad ejecutado");
-});
+    
+    
+    res.json()
+    .then(data => {
+        console.log('data', data);
+        clientes = data.listaClientes;
+        console.log('lista:', clientes);
+
+    
+
+        var select = document.getElementById("clienteSelect");
+    
+    
+
+        clientes.forEach((item, index)=>{
+        var option = document.createElement("option");
+        option.text = item.nombre;
+        select.add(option);
+       
+
+        });
+
+
+    
+
+    });
+
+}
+
+    fetchClientes();
+
+    //Funcion agregarCliente(si es que no existe en BD)
+
+    document.getElementById("btnNuevoCliente").addEventListener("click", async () => {
+        const nombre = prompt("Favor, ingrese el nombre del nuevo Cliente:");
+        if(!nombre) return;
+        const nombreCliente = nombre.trim();
+        console.log("Nuevo Cliente:", nombreCliente);
+
+        const option = document.createElement("option");
+        option.value = nombreCliente;
+        option.textContent = nombreCliente;
+        option.selected = true;
+
+        document.getElementById("clienteSelect").appendChild(option);
+    });
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    const SignaturePad = window.SignaturePad;
+    const canvas1 = document.getElementById("firmaClienteCanvas");
+    const canvas2 = document.getElementById("firmaTecnicoCanvas");
+
+    const signaturePad1 = new SignaturePad(canvas1, {
+        backgroundColor: "rgba(255, 255, 255, 0)",
+        penColor: "rgb(0, 0, 0)",
+        minWidth: 0.5,
+        maxWidth: 1.8
+    });
+
+    const signaturePad2 = new SignaturePad(canvas2, {
+        backgroundColor: "rgba(255, 255, 255, 0)",
+        penColor: "rgb(0, 0, 0)",
+        minWidth: 0.5,
+        maxWidth: 1.8
+    });
+
+    const btnLimpiarFirmaCliente = document.getElementById("btnLimpiarFirmaCliente");
+    const btnLimpiarFirmaTecnico = document.getElementById("btnLimpiarFirmaTecnico");
+
+    btnLimpiarFirmaCliente.addEventListener("click", () => {
+        signaturePad1.clear();
+
+    document.getElementById("firmaClientebase64").value = "";
+    });
+
+    btnLimpiarFirmaTecnico.addEventListener("click", () => {
+        signaturePad2.clear();
+
+    document.getElementById("firmaTecnicobase64").value = "";
+    });
+
+
+    window.signaturePad1 = signaturePad1;
+    window.signaturePad2 = signaturePad2;
+
+    // Ajustar el tamaño del canvas al cargar la página
+    function resizeCanvas(canvas, signaturePad) {
+        const ratio = Math.max(window.devicePixelRatio || 1, 1);
+        canvas.width = canvas.offsetWidth * ratio;
+        canvas.height = canvas.offsetHeight * ratio;
+        canvas.getContext("2d").scale(ratio, ratio);
+        signaturePad.clear(); // Limpiar la firma al redimensionar
+    }
+
+    resizeCanvas(canvas1, signaturePad1);
+    resizeCanvas(canvas2, signaturePad2);
+
+    // 5) (Opcional) si el usuario rota el móvil o cambia tamaño
+    window.addEventListener("resize", () => {
+        resizeCanvas(canvas1, signaturePad1);
+        resizeCanvas(canvas2, signaturePad2);
+        console.log("resizeCanvas ejecutado");
+    });
+});     
+    const canvas1 = document.getElementById("firmaClienteCanvas");
+    const canvas2 = document.getElementById("firmaTecnicoCanvas");
+
+    
+         
+    
+
+   
 
 // 5) (Opcional) si el usuario rota el móvil o cambia tamaño
-
+/*
     window.addEventListener("resize", () => {
-    resizeCanvas(wrapper1, canvas1, signaturePad1);
-    resizeCanvas(wrapper2, canvas2, signaturePad2);
+    resizeCanvas(canvas1, signaturePad1);
+    resizeCanvas(canvas2, signaturePad2);
     console.log("resizeCnavas addEvenListenes resize ejecutado");
 });
-
-// 6) Botones borrar (si usás onclick en HTML)
-    window.signatureClear1 = () => {
-    signaturePad1.clear();
-    console.log("signatureClear ejecutado");
-    };
-
-    window.signatureClear2 = () => {
-    signaturePad2.clear();
-
-    };
-/*
-    let listaEmailsCliente = [];
-
-    async function obtenerEmailsCliente(nombreCliente){
-            try {
-                if(!nombreCliente) return [];
-                const res = await fetch(
-                    `${API_BASE}/clientes/${encodeURIComponent(nombreCliente)}`,
-                    {
-                        method: "GET",
-                        headers: {auth: "auth"}
-                    }
-                );
-
-                const data = await res.json();
-                console.log("cliente obtenido:", data);
-                if(!res.ok || !data.ok || !data.cliente){
-
-                    return [];
-                }
-                return Array.isArray(data.cliente.emails) ? data.cliente.emails : [];
-            } catch (error) {
-              console.log("Error obteniendo emails del Cliente", error); 
-              return []; 
-            }
-        };
-        
 */
 
-    var formulario = document.getElementById("formulario");
+
+    var formulario = document.getElementById("formInforme");
 
     formulario.addEventListener('submit', async (e) => {
         console.log('submit formulario');
@@ -242,7 +269,7 @@ const signaturePad2 = new SignaturePad(canvas2);
             alert("Error al guardar informe o subir imagenes");
         }
 
-        
+    });        
         
 
        async function guardarInforme(){
@@ -373,7 +400,7 @@ const signaturePad2 = new SignaturePad(canvas2);
 
 
     
-});
+
         
     
 

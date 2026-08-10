@@ -16,7 +16,7 @@
             <div class="col-lg-8">
                 <div class="card shadow-sm">
                     <div class="card-header bg-primary text-white py-3">
-                            <h4 class="mb-0">Informe de Servicios</h4>
+                        <h4 class="mb-0">Informe de Servicios</h4>
                     </div>
                     <div class="card-body p-4">
                         <form id="formInforme" class="needs-validation" novalidate>
@@ -27,17 +27,17 @@
                                     
                                 <div class="col-12 col-md-6 mb-3">
 
-                                        <label for="clienteSelect" class="form-label fw-semibold">
-                                                Cliente
-                                        </label>
-                                        <div class="input-group">
-                                           <select id="clienteSelect" class="form-select" required>
-                                                <option value="">Seleccione un Cliente</option>
-                                           </select>
+                                    <label for="clienteSelect" class="form-label fw-semibold">
+                                       Cliente
+                                   </label>
+                                    <div class="input-group">
+                                        <select id="clienteSelect" class="form-select" required>
+                                            <option value="">Seleccione un Cliente</option>
+                                       </select>
                                            <button type="button" id="btnNuevoCliente" class="btn btn-outline-success">
-                                            Nuevo Cliente
+                                                Nuevo Cliente
                                            </button> 
-                                        </div>
+                                    </div>
                                 </div>
 
                                 <div class="col-12 col-md-6 mb-3">
@@ -45,7 +45,7 @@
                                                     Tecnicos
                                         </label>
                                     <div class="input-group">
-                                            <select id="tecnicoSelect" class="form-select">
+                                            <select id="tecnicos" class="form-select">
                                                 <option value="">Seleccione un tecnico</option>
                                             </select>
                                         <button
@@ -220,8 +220,8 @@
                                         <input type="text" id="recibido" class="form-control" required>
                                 </div>
 
-                                    <hr class="my-4">
-                                    <h5 class="text-primary">Firmas</h5>
+                                <hr class="my-4">
+                                <h5 class="text-primary">Firmas</h5>
 
                                 <div class="col-12 col-md-6 mb-3" >
                                         <label class="form-label fw-semibold">Firma del Cliente</label>
@@ -265,9 +265,9 @@
         </div> <!--div class rox-->
     </div>    
                               
-             <!-- Enlace a la biblioteca Signature Pad (útil para trazos suaves) 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/signature_pad/1.3.5/signature_pad.min.js"></script>-->
+           
         
+        <script src="/js/signature_pad.umd.min.js"></script>
         <script src="/js/bootstrap.bundle.min.js"></script>
         <script src="/js/informe.js"></script>
 

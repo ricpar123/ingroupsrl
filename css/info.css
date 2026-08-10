@@ -16,9 +16,11 @@
 
 .firma-box canvas {
   width: 100% !important;
-  height: 100% !important;
+  height: 160px !important;
   display: block;
-  cursor: crosshair;
+  border-radius: 6px;
+  border: 1px solid #ced4da;
+  touch-action: none; /* Evita el desplazamiento al dibujar en dispositivos táctiles */
  } 
 
 .foto-miniatura {

@@ -1,35 +1,54 @@
+
+
 /* global Html5QrcodeScanner */
 
-//Callback function executed on a successful scan
-function onScanSuccess(decodedText, decodedResult) {
-  console.log(`Scan result: ${decodedText}`, decodedResult);
-// Print the result to the UI
-  document.getElementById('result').innerText = `Scanned Content: ${decodedText}`;
-            
-// Optional: Stop scanning after the first success and clear the UI container
-  html5QrcodeScanner.clear().catch(error => {
-    console.error("Failed to clear scanner.", error);
-  });
+function parseQR(texto) {
+  const partes = texto
+    .split(/\r?\n/)
+    .map(l => l.trim())
+    .filter(Boolean);
+
+  if (partes.length < 5) {
+    throw new Error("QR inválido: deben ser 5 líneas");
+  }
+
+  return {
+    cliente: partes[0],
+    descripcion: partes[1],
+    marca: partes[2],
+    modelo: partes[3],
+    serie: partes[4],
+  };
 }
 
-// Optional callback function executed on scan errors (can be verbose)
-        function onScanFailure(error) {
-            // It is generally safe to ignore these failures as they trigger every frame a code isn't detected
-        }
+document.addEventListener("DOMContentLoaded", () => {
+  const onScanSuccess = (decodedText) => {
+    console.log("✅ QR LEÍDO:", decodedText);
 
-// Configuration options for the scanner UI and engine
-  const config = { 
-    fps: 10,             // Sets frames per second to process frames
-    qrbox: {             // Dimensions for the focused scannable square box
-    width: 250, 
-    height: 250 
-    },
-    rememberLastUsedCamera: true // Automatically uses the previously allowed camera
+    let data;
+    try {
+      data = parseQR(decodedText);
+    } catch (e) {
+      alert(e.message);
+      return;
+    }
+
+    sessionStorage.setItem("qr_equipo", JSON.stringify(data));
+
+    scanner.clear().then(() => {
+      window.location.href = "/vistas/informe.html";
+    });
   };
 
-        // Instantiate the end-to-end user interface scanner
-        // "reader" points to the ID of the HTML element declared above
-        const html5QrcodeScanner = new Html5QrcodeScanner("reader", config, /* verbose= */ false);
-        
-        // Render and start the camera stream
-        html5QrcodeScanner.render(onScanSuccess, onScanFailure);
+  const scanner = new Html5QrcodeScanner(
+    "reader",
+    {
+      fps: 10,
+      qrbox: { width: 300, height: 300 }, // 🔴 CLAVE
+      rememberLastUsedCamera: true,
+    },
+    false
+  );
+
+  scanner.render(onScanSuccess);
+});

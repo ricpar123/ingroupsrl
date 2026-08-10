@@ -13,6 +13,7 @@
   "dependencies": {
     "html5-qrcode": "^2.3.8",
     "http-server": "^14.1.1",
+    "signature_pad": "^5.1.4",
     "sweetalert2": "^11.26.25"
   }
 }
