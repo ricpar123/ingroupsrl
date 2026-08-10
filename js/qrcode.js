@@ -42,19 +42,13 @@ document.addEventListener("DOMContentLoaded", () => {
         `serie:${data.serie}`
     );
 
-    let data;
-    try {
-      data = parseQR(decodedText);
-      console.log("Datos del QR:", data);
-    } catch (e) {
-      alert(e.message);
-      return;
-    }
+  
+   
 
-const params = new URLSearchParams(data);
-window.location.href = "/vistas/informe.html?" + params.toString();
+    const params = new URLSearchParams(data);
+    window.location.href = "/vistas/informe.html?" + params.toString();
 
-/*    sessionStorage.setItem("qr_equipo", JSON.stringify(data));
+/*    sessionStorage.setItem("qr_equipo", JSON.stringify(data)); */
 
     };
 
@@ -69,6 +63,5 @@ window.location.href = "/vistas/informe.html?" + params.toString();
   );
 
   scanner.render(onScanSuccess);
-*/
-  };
-});
+
+});S
