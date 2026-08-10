@@ -35,6 +35,11 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
+  if (typeof Html5QrcodeScanner === "undefined") {
+    alert("ERROR: Html5QrcodeScanner NO está definido");
+    return;
+}
+
   alert("3 - reader encontrado"); 
 
   if(typeof reader !== "undefined") {
