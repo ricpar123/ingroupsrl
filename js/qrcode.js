@@ -42,8 +42,17 @@ document.addEventListener("DOMContentLoaded", () => {
         `serie:${data.serie}`
     );
 
+    let data;
+    try {
+      data = parseQR(decodedText);
+      console.log("Datos del QR:", data);
+    } catch (e) {
+      alert(e.message);
+      return;
+    }
+
 const params = new URLSearchParams(data);
-windows.location.href = "/vistas/informe.html?" + params.toString();
+window.location.href = "/vistas/informe.html?" + params.toString();
 
 /*    sessionStorage.setItem("qr_equipo", JSON.stringify(data));
 
