@@ -22,7 +22,7 @@ function parseQR(texto) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  let qrProcesado;
+  let qrProcesado = false;
 
   const onScanSuccess = async (decodedText) => {
     alert("ENTRO EN onScanSuccess");
@@ -64,14 +64,14 @@ document.addEventListener("DOMContentLoaded", () => {
       } catch (error) {
         console.error("Error clearing scanner:", error);
         window.location.assign = ("/vistas/informe.html?" + params.toString());
-      };
+      }
 
 
     
 
 /*    sessionStorage.setItem("qr_equipo", JSON.stringify(data)); */
 
-    }
+    };
 
   const scanner = new Html5QrcodeScanner(
     "reader",
