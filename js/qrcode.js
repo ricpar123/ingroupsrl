@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
 const params = new URLSearchParams(data);
 windows.location.href = "/vistas/informe.html?" + params.toString();
 
-    sessionStorage.setItem("qr_equipo", JSON.stringify(data));
+/*    sessionStorage.setItem("qr_equipo", JSON.stringify(data));
 
     };
 
@@ -60,4 +60,6 @@ windows.location.href = "/vistas/informe.html?" + params.toString();
   );
 
   scanner.render(onScanSuccess);
+*/
+  };
 });
