@@ -4,11 +4,6 @@
 
 alert("0 - QRCODE.JS cargado");
 
-alert(
-    "qrcode.js → " +
-    typeof window.Html5QrcodeScanner
-);
-
 function parseQR(texto) {
   const partes = texto
     .split(/\r?\n/)
@@ -29,21 +24,11 @@ function parseQR(texto) {
 
 }
 
-alert("1 - QRCODE.JS cargado");
-
 document.addEventListener("DOMContentLoaded", () => {
 
   alert("2 - DOMContentLoaded ejecutado");
 
-  alert(
-    "Dentro de qrcode.js; " + 
-    typeof window.Html5QrcodeScanner
-  );
-
-  if(typeof window.Html5QrcodeScanner === "undefined") {
-    alert("ERROR: Html5QrcodeScanner NO está disponible");
-    return;
-  }
+  const reader = document.getElementById("reader");
 
   if(!reader) {
     alert("3 - reader no encontrado");
@@ -52,21 +37,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
   alert("3 - reader encontrado");
 
-  const scanner = new window.Html5QrcodeScanner(
-    "reader",
-    {
-      fps: 10,
-      qrbox: { width: 300, height: 300 },
-      rememberLastUsedCamera: true,
-    },
-    false
-  );
+  if(typeof window.Html5QrcodeScanner === "undefined") {
+    alert("ERROR: Html5QrcodeScanner NO está disponible");
+    return;
+  }
 
-  scanner.render(onScanSuccess);
+   let qrProcesado = false;
 
-  let qrProcesado = false;
+   let scanner;
 
-  const onScanSuccess = async (decodedText) => {
+    const onScanSuccess = async (decodedText) => {
     alert("ENTRO EN onScanSuccess");
     if(qrProcesado) return;
     qrProcesado = true;
@@ -80,8 +60,6 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    
-
     const params = new URLSearchParams(data);
 
       try {
@@ -92,11 +70,29 @@ document.addEventListener("DOMContentLoaded", () => {
         
       }
 
-      window.location.assign = ("/vistas/informe.html?" + params.toString());
+      window.location.assign = ("/vistas/informe.html?" + params.toString()
+      );
+    };
 
-  };
+
+    scanner = new window.Html5QrcodeScanner(
+    "reader",
+    {
+      fps: 10,
+      qrbox: { width: 300, height: 300 },
+      rememberLastUsedCamera: true,
+    },
+    false
+  );
+
+  scanner.render(onScanSuccess);
+
+}); 
+
+ 
+
     
 
+    
 
-
-});
+ 
