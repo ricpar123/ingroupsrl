@@ -47,48 +47,77 @@ document.addEventListener("DOMContentLoaded", () => {
    let scanner;
 
     const onScanSuccess = async (decodedText) => {
-    alert("ENTRO EN onScanSuccess");
-    if(qrProcesado) return;
-    qrProcesado = true;
-
-    let data;
-    try {
-      data = parseQR(decodedText);
-    } catch (e) {
-      qrProcesado = false;
-      alert(e.message);
-      return;
-    }
-
-    const params = new URLSearchParams(data);
-
-      try {
-        await scanner.clear();
+     
+      if(qrProcesado) return;
+      qrProcesado = true;
+      alert("1- ENTRO en onScanSuccess");
       
-      } catch (error) {
-        console.error("Error clearing scanner:", error);
-        
-      }
+      alert("2 - decodedText recibido:\n" + decodedText);
 
-      window.location.assign = ("/vistas/informe.html?" + params.toString()
+      let data;
+      try {
+        alert("3 - antes de parseQR");
+        data = parseQR(decodedText);
+        alert("4 - parseQR terminado");
+      } catch (error) {
+        qrProcesado = false;
+        alert(
+          "ERROR EN parseQR:\n" +
+            e.name + "\n" +
+            e.message
+        )
+        return;
+      }
+        
+      
+      alert(
+        `Cliente: ${data.cliente}\n` +
+        `Equipo: ${data.equipo}\n` +
+        `Marca: ${data.marca}\n` +
+        `Modelo: ${data.modelo}\n` +
+        `Serie: ${data.serie}`
       );
+
+      const params = new URLSearchParams(data);
+
+      const url =
+        "/vistas/informe.html?" + params.toString();
+
+      alert("Voy a navegar a:\n" + url);
+
+      window.location.assign(url);
     };
 
-
-    scanner = new window.Html5QrcodeScanner(
+// CREAR EL SCANNER
+scanner = new window.Html5QrcodeScanner(
     "reader",
     {
-      fps: 10,
-      qrbox: { width: 300, height: 300 },
-      rememberLastUsedCamera: true,
+        fps: 10,
+        qrbox: {
+            width: 300,
+            height: 300
+        },
+        rememberLastUsedCamera: true
     },
     false
-  );
+);
 
-  scanner.render(onScanSuccess);
 
-}); 
+// ACTIVARLO
+scanner.render(onScanSuccess);
 
+
+}); // fin DOMContentLoaded
+
+
+
+      
+        
+
+
+     
+
+    
  
 
     
