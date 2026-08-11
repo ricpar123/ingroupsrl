@@ -12,11 +12,16 @@ function obtenerTecnicosSeleccionados() {
 document.addEventListener("DOMContentLoaded", () => {
  
     const params = new URLSearchParams(window.location.search);
-    const cliente = params.get("cliente");
-    const equipo = params.get("equipo");
-    const marca = params.get("marca");
-    const modelo = params.get("modelo");
-    const serie = params.get("serie");
+
+    alert(
+        `RECIBIDO EN INFORME:\n\n` +
+        `Cliente: ${params.get("cliente")}\n` +
+        `Equipo: ${params.get("equipo")}\n` +
+        `Marca: ${params.get("marca")}\n` +
+        `Modelo: ${params.get("modelo")}\n` +
+        `Serie: ${params.get("serie")}`
+    )
+    
 
     if (cliente) document.getElementById("cliente").value = cliente;
     if (equipo) document.getElementById("equipo").value = equipo;
