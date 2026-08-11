@@ -4,6 +4,11 @@
 
 alert("0 - QRCODE.JS cargado");
 
+alert(
+    "qrcode.js → " +
+    typeof window.Html5QrcodeScanner
+);
+
 function parseQR(texto) {
   const partes = texto
     .split(/\r?\n/)
@@ -30,6 +35,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
   alert("2 - DOMContentLoaded ejecutado");
 
+  alert(
+    "Dentro de qrcode.js; " + 
+    typeof window.Html5QrcodeScanner
+  );
+
+  if(typeof window.Html5QrcodeScanner === "undefined") {
+    alert("ERROR: Html5QrcodeScanner NO está disponible");
+    return;
+  }
+
   if(!reader) {
     alert("3 - reader no encontrado");
     return;
@@ -37,17 +52,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
   alert("3 - reader encontrado");
 
-  if (typeof Html5QrcodeScanner === "undefined") {
-    alert("ERROR: Html5QrcodeScanner NO está definido");
-    return;
-}
+  const scanner = new window.Html5QrcodeScanner(
+    "reader",
+    {
+      fps: 10,
+      qrbox: { width: 300, height: 300 },
+      rememberLastUsedCamera: true,
+    },
+    false
+  );
 
-   
-
-   
-
-  
-
+  scanner.render(onScanSuccess);
 
   let qrProcesado = false;
 
@@ -79,31 +94,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
       window.location.assign = ("/vistas/informe.html?" + params.toString());
 
-
+  };
     
 
-/*    sessionStorage.setItem("qr_equipo", JSON.stringify(data)); */
 
-    };
-
-    let scanner;
-
-    try {
-      scanner = new Html5QrcodeScanner(
-        "reader",
-        {
-          fps: 10,
-          qrbox: { width: 300, height: 300 },
-          rememberLastUsedCamera: true,
-        },
-        false
-      );
-      alert("5 - Scanner creado");
-      scanner.render(onScanSuccess);
-      alert("6 - scanner.render ejecutado");
-    } catch (error) {
-      
-      alert("Error initializing scanner: " + error.message);
-    };
 
 });
