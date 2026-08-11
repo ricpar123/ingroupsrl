@@ -85,6 +85,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
       alert("Voy a navegar a:\n" + url);
 
+      alert("datos a Informe:", data);
+
       window.location.assign(url);
     };
 

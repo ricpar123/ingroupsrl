@@ -3,14 +3,18 @@ const API_BASE = "http://localhost:8081";
 const API_URL_PDF = "https://servering-production.up.railway.app/informes/pdf/informe/:id";
 
 
-function obtenerTecnicosSeleccionados() {
-  const select = document.getElementById("tecnicoSelect");
+document.addEventListener("DOMContentLoaded", async () => {
+    try {
+        await fetchUsuarios();
+        await fetchClientes();
+        cargarDatosQR();
 
-  return Array.from(select.selectedOptions).map(opt => opt.value);
-}
+    } catch (error) {
+        
+    }
+})
 
-document.addEventListener("DOMContentLoaded", () => {
- 
+function cargarDatosQR() {
     const params = new URLSearchParams(window.location.search);
 
     alert(
@@ -22,45 +26,38 @@ document.addEventListener("DOMContentLoaded", () => {
         `Serie: ${params.get("serie")}`
     )
     
+    const cliente = params.get("cliente");
+    const equipo = params.get("equipo");
+    const marca = params.get("marca");
+    const modelo = params.get("modelo");
+    const serie = params.get("serie");
 
-    if (cliente) document.getElementById("cliente").value = cliente;
-    if (equipo) document.getElementById("equipo").value = equipo;
-    if (marca) document.getElementById("marca").value = marca;
-    if (modelo) document.getElementById("modelo").value = modelo;
-    if (serie) document.getElementById("serie").value = serie;
+    if (cliente) {
+        document.getElementById("cliente").value = cliente;
+    }
 
-});
+    if (equipo) {
+        document.getElementById("equipo").value = equipo;
+    }
+
+    if (marca) {
+        document.getElementById("marca").value = marca;
+    }
+
+    if (modelo) {
+        document.getElementById("modelo").value = modelo;
+    }
+
+    if (serie) {
+        document.getElementById("nroSerie").value = serie;
+    }
+}
+
+    
 
 
-    /*
-    const raw = sessionStorage.getItem("qr_equipo");
-  if (!raw) return;
 
-  let data;
-  try {
-    data = JSON.parse(raw);
-  } catch {
-    sessionStorage.removeItem("qr_equipo");
-    return;
-  }
 
-  const set = (id, value) => {
-    const el = document.getElementById(id);
-    if (el && value != null) el.value = value;
-  };
-
-  console.log("Datos del QR:", data);
-
-  set("clienteSelect", data.clienteSelect);
-  set("equipo", data.equipo);
-  set("marca", data.marca);
-  set("modelo", data.modelo);
-  set("serie", data.serie);
-
-  // usar una sola vez
-  sessionStorage.removeItem("qr_equipo");
-});
-*/
 let usuarios = [];
 
 async function fetchUsuarios(){
@@ -93,7 +90,7 @@ async function fetchUsuarios(){
 
 }
 
-fetchUsuarios();
+
 
 async function fetchClientes(){
    
@@ -102,15 +99,12 @@ async function fetchClientes(){
             method: "GET",
             headers: {"auth": "auth"}
             });
-    
-
-   
-    
+        
     if(!res.ok){
         const msg = `error en fetchClientes:, ${res.status}`;
         throw new Error(msg);
     }
-
+    
     
     
     res.json()
@@ -126,21 +120,18 @@ async function fetchClientes(){
     
 
         clientes.forEach((item, index)=>{
-        var option = document.createElement("option");
-        option.text = item.nombre;
-        select.add(option);
+            var option = document.createElement("option");
+            option.text = item.nombre;
+            select.add(option);
        
 
         });
-
-
-    
 
     });
 
 }
 
-    fetchClientes();
+   
 
     //Funcion agregarCliente(si es que no existe en BD)
 
@@ -157,6 +148,13 @@ async function fetchClientes(){
 
         document.getElementById("clienteSelect").appendChild(option);
     });
+
+
+function obtenerTecnicosSeleccionados() {
+  const select = document.getElementById("tecnicoSelect");
+
+  return Array.from(select.selectedOptions).map(opt => opt.value);
+}
 
 
 document.addEventListener("DOMContentLoaded", () => {
