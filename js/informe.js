@@ -7,10 +7,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     try {
         await fetchUsuarios();
         await fetchClientes();
-        cargarDatosQR();
+        //cargarDatosQR();
 
     } catch (error) {
-        
+        console.log("Error en cargarUsuarios y/o cargarClientes", error);
     }
 })
 
