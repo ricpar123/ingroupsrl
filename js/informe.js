@@ -88,29 +88,16 @@ async function fetchUsuarios(){
 
 
 async function fetchClientes(){
-   
-    const res = await fetch(`${API_BASE}/clientes`, 
-        {
-            method: "GET",
-            headers: {"auth": "auth"}
-            });
-        
-    if(!res.ok){
-        const msg = `error en fetchClientes:, ${res.status}`;
-        throw new Error(msg);
-    }
+  try {
+    alert("1 - entra a fetchClientes");
+    const response = await fetch(API_BASE/clientes);
+    alert("2 - respuesta clientes:" + response.status);
+    const data = await response.json();
+    alert("3 - clientes recibidos:" + data.length);
+    clientes = data.listaClientes;
+    alert("4 - lista de clientes: ", clientes);
     
-    
-    
-    res.json()
-    .then(data => {
-        alert('data', data);
-        clientes = data.listaClientes;
-        alert('lista:', clientes);
-
-    
-
-        var select = document.getElementById("clienteSelect");
+    var select = document.getElementById("clienteSelect");
     
     
 
@@ -121,10 +108,24 @@ async function fetchClientes(){
        
 
         });
+    
 
-    });
+  } catch (error) {
+    console.log("error en fetch clientes", error)
+  } 
+    
 
-}
+        
+    
+    
+    
+    
+
+    
+
+        
+
+    
 
    
 
