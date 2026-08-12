@@ -1,5 +1,5 @@
 
-const API_BASE = "http://localhost:8081";
+const API_BASE = "http://servering-production.up.railway.app";
 const API_URL_PDF = "https://servering-production.up.railway.app/informes/pdf/informe/:id";
 
 
@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     } catch (error) {
         console.log("Error en cargarUsuarios y/o cargarClientes", error);
     }
-})
+});
 
 function cargarDatosQR() {
     const params = new URLSearchParams(window.location.search);
@@ -53,11 +53,6 @@ function cargarDatosQR() {
     }
 }
 
-    
-
-
-
-
 let usuarios = [];
 
 async function fetchUsuarios(){
@@ -94,7 +89,7 @@ async function fetchUsuarios(){
 
 async function fetchClientes(){
    
-    const res = await fetch('http://localhost:8081/clientes', 
+    const res = await fetch(`${API_BASE}/clientes`, 
         {
             method: "GET",
             headers: {"auth": "auth"}
