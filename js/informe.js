@@ -53,7 +53,7 @@ function cargarDatosQR() {
     }
 }
 
-let usuarios = [];
+
 
 async function fetchUsuarios(){
    alert("fetchUsuarios ejecutado");
@@ -88,33 +88,32 @@ async function fetchUsuarios(){
 
 
 async function fetchClientes(){
-  try {
-    alert("1 - entra a fetchClientes");
-    const response = await fetch(API_BASE/clientes);
-    alert("2 - respuesta clientes:" + response.status);
-    const data = await response.json();
-    alert("3 - clientes recibidos:" + data.length);
-    clientes = data.listaClientes;
-    alert("4 - lista de clientes: ", clientes);
+  alert("fetchClientes iniciado");
+    const res = await fetch(`${API_BASE}/clientes`, 
+        {
+            method: "GET"
+           
+            });
     
-    var select = document.getElementById("clienteSelect");
-    
-    
+    if(!res.ok){
+        const msg = `error en fetchCientes:, ${res.status}`;
+        throw new Error(msg);
+    }
 
-        clientes.forEach((item, index)=>{
+    res.json()
+    .then(data => {
+        alert('data', data);
+        clientes= data.listaClientes;
+        alert('lista:', clientes);
+
+        var select = document.getElementById("clienteSelect");
+            clientes.forEach((item, index) => {
             var option = document.createElement("option");
             option.text = item.nombre;
             select.add(option);
-       
-
         });
-    
 
-  } catch (error) {
-    console.log("error en fetch clientes", error)
-  } 
-    
-
+    });
         
 }  
     
