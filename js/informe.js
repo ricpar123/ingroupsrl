@@ -56,7 +56,7 @@ function cargarDatosQR() {
 let usuarios = [];
 
 async function fetchUsuarios(){
-   console.log("fetchUsuarios ejecutado");
+   alert("fetchUsuarios ejecutado");
     const res = await fetch(`${API_BASE}/usuarios`, 
         {
             method: "GET"
@@ -70,9 +70,9 @@ async function fetchUsuarios(){
 
     res.json()
     .then(data => {
-        console.log('data', data);
+        alert('data', data);
         usuarios = data.usuarios;
-        console.log('lista:', usuarios);
+        alert('lista:', usuarios);
 
         var select = document.getElementById("tecnicos");
             usuarios.forEach((item, index) => {
@@ -104,9 +104,9 @@ async function fetchClientes(){
     
     res.json()
     .then(data => {
-        console.log('data', data);
+        alert('data', data);
         clientes = data.listaClientes;
-        console.log('lista:', clientes);
+        alert('lista:', clientes);
 
     
 
