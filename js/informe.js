@@ -1,5 +1,5 @@
 
-const API_BASE = "http://servering-production.up.railway.app";
+const API_BASE = "https://servering-production.up.railway.app";
 const API_URL_PDF = "https://servering-production.up.railway.app/informes/pdf/informe/:id";
 
 
