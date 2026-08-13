@@ -30,7 +30,25 @@ function cargarDatosQR() {
     const equipo = params.get("equipo");
     const marca = params.get("marca");
     const modelo = params.get("modelo");
-    const serie = params.get("serie");
+    const serie = params.get("serie")
+    
+    alert("confirmacion:", cliente, equipo, marca, modelo, serie);
+
+    const campoCliente = document.getElementById("cliente");
+    const campoEquipo = document.getElementById("equipo");
+    const campoMarca = document.getElementById("marca");
+    const campoModelo = document.getElementById("modelo");
+    const campoSerie = document.getElementById("nroSerie");
+
+    alert("Campos encontrados:", campoCliente,
+        campoEquipo,
+        campoMarca,
+        campoModelo,
+        campoSerie);
+
+        
+
+
 
     if (cliente) {
         document.getElementById("cliente").value = cliente;
