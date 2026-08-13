@@ -56,7 +56,7 @@ function cargarDatosQR() {
 
 
     if (cliente) {
-        document.getElementById("cliente").value = cliente;
+        document.getElementById("clienteSelect").value = cliente;
     }
 
     if (equipo) {
@@ -72,7 +72,7 @@ function cargarDatosQR() {
     }
 
     if (serie) {
-        document.getElementById("nroSerie").value = serie;
+        document.getElementById("serie").value = serie;
     }
 }
 
