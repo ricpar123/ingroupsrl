@@ -25,14 +25,23 @@ function cargarDatosQR() {
         `Modelo: ${params.get("modelo")}\n` +
         `Serie: ${params.get("serie")}`
     )
+
+    alert("ANTES DE CREAR VARIABLES");
     
     const cliente = params.get("cliente");
     const equipo = params.get("equipo");
     const marca = params.get("marca");
     const modelo = params.get("modelo");
-    const serie = params.get("serie")
+    const serie = params.get("serie");
+
+    alert("VARIABLES CREADAS");
     
-    alert("confirmacion:", cliente, equipo, marca, modelo, serie);
+    alert(`CONFIRMACION
+            Cliente: ${cliente}
+            Equipo: ${equipo}
+            Marca: ${marca}
+            Modelo: ${modelo}
+            Serie: ${serie}`);
 
     const campoCliente = document.getElementById("cliente");
     const campoEquipo = document.getElementById("equipo");
@@ -46,7 +55,7 @@ function cargarDatosQR() {
         campoModelo,
         campoSerie);
 
-        
+
 
 
 
