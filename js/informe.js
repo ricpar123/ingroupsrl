@@ -49,11 +49,7 @@ function cargarDatosQR() {
     const campoModelo = document.getElementById("modelo");
     const campoSerie = document.getElementById("nroSerie");
 
-    alert("Campos encontrados:", campoCliente,
-        campoEquipo,
-        campoMarca,
-        campoModelo,
-        campoSerie);
+    
 
 
 
