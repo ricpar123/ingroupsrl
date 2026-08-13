@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     try {
         await fetchUsuarios();
         await fetchClientes();
-        //cargarDatosQR();
+        cargarDatosQR();
 
     } catch (error) {
         console.log("Error en cargarUsuarios y/o cargarClientes", error);
@@ -55,6 +55,72 @@ function cargarDatosQR() {
 
 
 
+const tecnicosSeleccionados = [];
+
+function renderTecnicos() {
+    const lista = document.getElementById("listaTecnicos");
+    lista.innerHTML = "";
+
+    tecnicosSeleccionados.forEach((tecnico, index) => {
+        const badge = document.createElement("span");
+        badge.className = "badge bg-primary me-2 mb-2 p-2";
+
+        badge.innerHTML = `
+        ${tecnico}
+        <button
+            type="button"
+            class="btn-close btn-close-white ms-2"
+            onclick="eliminarTecnico(${index})">
+        </button>
+        `;
+        lista.appendChild(badge);
+    });
+}
+
+function eliminarTecnico(index) {
+    tecnicosSeleccionados.splice(index, 1);
+    renderTecnicos();
+}
+
+document.getElementById("btnAgregarTecnico").addEventListener("click", () => {
+  const select = document.getElementById("tecnicoSelect");
+  const tecnico = select.value;
+
+  if (!tecnico) return;
+
+  if (tecnicosSeleccionados.includes(tecnico)) {
+    alert("Ese técnico ya fue agregado");
+    return;
+  }
+
+  tecnicosSeleccionados.push(tecnico);
+  renderTecnicos();
+});
+
+document.getElementById("btnNuevoTecnico").addEventListener("click", async () => {
+  const nombre = prompt("Ingrese el nombre del nuevo técnico:");
+
+  if (!nombre || !nombre.trim()) return;
+
+  const nuevoTecnico = nombre.trim();
+
+  const select = document.getElementById("tecnicoSelect");
+
+  const option = document.createElement("option");
+  option.value = nuevoTecnico;
+  option.textContent = nuevoTecnico;
+  option.selected = true;
+
+  select.appendChild(option);
+
+  if (!tecnicosSeleccionados.includes(nuevoTecnico)) {
+    tecnicosSeleccionados.push(nuevoTecnico);
+    renderTecnicos();
+  }
+
+  // Opcional: guardar también en Mongo si tenés endpoint
+});
+
 async function fetchUsuarios(){
    alert("fetchUsuarios ejecutado");
     const res = await fetch(`${API_BASE}/usuarios`, 
@@ -72,9 +138,9 @@ async function fetchUsuarios(){
     .then(data => {
         alert('data', data);
         usuarios = data.usuarios;
-        alert('lista:', usuarios);
+        
 
-        var select = document.getElementById("tecnicos");
+        var select = document.getElementById("tecnicoSelect");
             usuarios.forEach((item, index) => {
             var option = document.createElement("option");
             option.text = item.userid;
@@ -85,10 +151,11 @@ async function fetchUsuarios(){
 
 }
 
+fetchUsuarios();
 
 
 async function fetchClientes(){
-  alert("fetchClientes iniciado");
+ 
     const res = await fetch(`${API_BASE}/clientes`, 
         {
             method: "GET"
@@ -102,10 +169,9 @@ async function fetchClientes(){
 
     res.json()
     .then(data => {
-        alert('data', data);
+        
         clientes= data.listaClientes;
-        alert('lista:', clientes);
-
+        
         var select = document.getElementById("clienteSelect");
             clientes.forEach((item, index) => {
             var option = document.createElement("option");
@@ -117,18 +183,7 @@ async function fetchClientes(){
         
 }  
     
-    
-    
-
-    
-
-        
-
-    
-
-   
-
-    //Funcion agregarCliente(si es que no existe en BD)
+//Funcion agregarCliente(si es que no existe en BD)
 
     document.getElementById("btnNuevoCliente").addEventListener("click", async () => {
         const nombre = prompt("Favor, ingrese el nombre del nuevo Cliente:");

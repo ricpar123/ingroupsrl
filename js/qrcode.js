@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
       } catch (error) {
         qrProcesado = false;
         alert(
-          "ERROR EN parseQR:\n" +
+          "5 - ERROR EN parseQR:\n" +
             e.name + "\n" +
             e.message
         )
@@ -107,7 +107,7 @@ scanner = new window.Html5QrcodeScanner(
 
 // ACTIVARLO
 scanner.render(onScanSuccess);
-
+alert("6 - scanner activado");
 
 }); // fin DOMContentLoaded
 
