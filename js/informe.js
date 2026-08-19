@@ -1,5 +1,8 @@
 
-const API_BASE = "https://servering-production.up.railway.app";
+
+alert("INFORME.JS NUEVO CARGADO");
+
+const API_BASE = "http://localhost:8081";
 const API_URL_PDF = "https://servering-production.up.railway.app/informes/pdf/informe/:id";
 
 
@@ -7,7 +10,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     try {
         await fetchUsuarios();
         await fetchClientes();
-        cargarDatosQR();
+        await inicializarFotos();
+       // cargarDatosQR();
 
     } catch (error) {
         console.log("Error en cargarUsuarios y/o cargarClientes", error);
@@ -49,12 +53,6 @@ function cargarDatosQR() {
     const campoModelo = document.getElementById("modelo");
     const campoSerie = document.getElementById("nroSerie");
 
-    
-
-
-
-
-
     if (cliente) {
         document.getElementById("clienteSelect").value = cliente;
     }
@@ -76,7 +74,36 @@ function cargarDatosQR() {
     }
 }
 
+async function fetchUsuarios(){
+const res = await fetch(`${API_BASE}/usuarios`, 
+        {
+            method: "GET"
+           
+            });
+    
+    if(!res.ok){
+        const msg = `error en fetchUsuarios:, ${res.status}`;
+        throw new Error(msg);
+    }
 
+    res.json()
+    .then(data => {
+        
+        usuarios = data.usuarios;
+        
+
+        var select = document.getElementById("tecnicoSelect");
+            usuarios.forEach((item, index) => {
+            var option = document.createElement("option");
+            option.text = item.userid;
+            select.add(option);
+        });
+
+    });
+
+}
+
+fetchUsuarios();
 
 const tecnicosSeleccionados = [];
 
@@ -141,41 +168,8 @@ document.getElementById("btnNuevoTecnico").addEventListener("click", async () =>
     renderTecnicos();
   }
 
-  // Opcional: guardar también en Mongo si tenés endpoint
+ 
 });
-
-async function fetchUsuarios(){
-   alert("fetchUsuarios ejecutado");
-    const res = await fetch(`${API_BASE}/usuarios`, 
-        {
-            method: "GET"
-           
-            });
-    
-    if(!res.ok){
-        const msg = `error en fetchUsuarios:, ${res.status}`;
-        throw new Error(msg);
-    }
-
-    res.json()
-    .then(data => {
-        alert('data', data);
-        usuarios = data.usuarios;
-        
-
-        var select = document.getElementById("tecnicoSelect");
-            usuarios.forEach((item, index) => {
-            var option = document.createElement("option");
-            option.text = item.userid;
-            select.add(option);
-        });
-
-    });
-
-}
-
-fetchUsuarios();
-
 
 async function fetchClientes(){
  
@@ -206,31 +200,47 @@ async function fetchClientes(){
         
 }  
     
-//Funcion agregarCliente(si es que no existe en BD)
-
-    document.getElementById("btnNuevoCliente").addEventListener("click", async () => {
-        const nombre = prompt("Favor, ingrese el nombre del nuevo Cliente:");
-        if(!nombre) return;
-        const nombreCliente = nombre.trim();
-        console.log("Nuevo Cliente:", nombreCliente);
-
-        const option = document.createElement("option");
-        option.value = nombreCliente;
-        option.textContent = nombreCliente;
-        option.selected = true;
-
-        document.getElementById("clienteSelect").appendChild(option);
-    });
-
-
 function obtenerTecnicosSeleccionados() {
   const select = document.getElementById("tecnicoSelect");
 
   return Array.from(select.selectedOptions).map(opt => opt.value);
 }
 
+function inicializarFotos () {
+    alert("Entro en inicializarFotos")
+    const btnFotoAntes =
+        document.getElementById("btnFotoAntes");
 
-document.addEventListener("DOMContentLoaded", () => {
+    const btnFotoDespues =
+        document.getElementById("btnFotoDespues");
+
+    const inputFotoAntes =
+        document.getElementById("fotoAntesInput");
+
+    const inputFotoDespues =
+        document.getElementById("fotoDespuesInput");
+
+    alert(
+    `Fotos:\n` +
+    `btnAntes: ${!!btnFotoAntes}\n` +
+    `btnDespues: ${!!btnFotoDespues}\n` +
+    `inputAntes: ${!!inputFotoAntes}\n` +
+    `inputDespues: ${!!inputFotoDespues}`
+    );
+
+    btnFotoAntes?.addEventListener("click", () => {
+        alert("CLICK FOTO ANTES");
+        inputFotoAntes.click();
+    });
+
+    btnFotoDespues?.addEventListener("click", () => {
+        alert("CLICK FOTO DESPUES");
+        inputFotoDespues.click();
+    });
+}
+
+
+document.addEventListener("DOMContentLoaded", async () => {
     const SignaturePad = window.SignaturePad;
     const canvas1 = document.getElementById("firmaClienteCanvas");
     const canvas2 = document.getElementById("firmaTecnicoCanvas");
@@ -290,27 +300,18 @@ document.addEventListener("DOMContentLoaded", () => {
     const canvas1 = document.getElementById("firmaClienteCanvas");
     const canvas2 = document.getElementById("firmaTecnicoCanvas");
 
-    
-         
-    
-
-   
-
-// 5) (Opcional) si el usuario rota el móvil o cambia tamaño
-/*
-    window.addEventListener("resize", () => {
-    resizeCanvas(canvas1, signaturePad1);
-    resizeCanvas(canvas2, signaturePad2);
-    console.log("resizeCnavas addEvenListenes resize ejecutado");
-});
-*/
-
-
     var formulario = document.getElementById("formInforme");
 
     formulario.addEventListener('submit', async (e) => {
-        console.log('submit formulario');
+       
         e.preventDefault();
+
+            //cargar firmas antes de guardar
+            document.getElementById("firmaClientebase64").value = 
+            signaturePad1.isEmpty() ? "" : signaturePad1.toDataURL("image/png");
+
+            document.getElementById("firmaTecnicobase64").value = 
+            signaturePad2.isEmpty() ? "" : signaturePad2.toDataURL("image/png");
 
     
         if(!formulario.checkValidity()){
@@ -319,26 +320,14 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
         console.log("formulario válido");
-
-
-        const nombreCliente = document.getElementById("cliente").value.trim();
-        //obtenerEmailsCliente(nombreCliente);
-
-
+    
         try {
-            //cargar firmas antes de guardar
-            document.getElementById("firma").value = 
-            signaturePad1.isEmpty() ? "" : signaturePad1.toDataURL("image/png");
-
-            document.getElementById("firmaT").value = 
-            signaturePad2.isEmpty() ? "" : signaturePad2.toDataURL("image/png");
+            
     
            const data = await guardarInforme();
-           console.log("respuesta:", data); 
+          
 
-           if(!data.ok) { alert("No se pudo guardar el informe"); 
-                return;
-            }
+          
             
            const informeId = data.informeId;
            console.log("Informe guardado con Id:", informeId);
@@ -365,45 +354,50 @@ document.addEventListener("DOMContentLoaded", () => {
             alert("Error al guardar informe o subir imagenes");
         }
 
-    });        
-        
+    });
+         
+    
 
-       async function guardarInforme(){
+   
 
-            const nombreCliente = document.getElementById("cliente").value.trim();
+// 5) (Opcional) si el usuario rota el móvil o cambia tamaño
+/*
+    window.addEventListener("resize", () => {
+    resizeCanvas(canvas1, signaturePad1);
+    resizeCanvas(canvas2, signaturePad2);
+    console.log("resizeCnavas addEvenListenes resize ejecutado");
+});
+*/
 
-            //Primero se obtienen los emails
-           // const emailsCliente = await obtenerEmailsCliente(nombreCliente);
-            //    console.log("emails's Cliente:", emailsCliente);
 
-        
-            const payload = {
-                cliente: nombreCliente,
-                //emails: emailsCliente,
-                tecnicos: obtenerTecnicosSeleccionados(),
-                equipo: document.getElementById("equipo").value.trim(),
-                marca: document.getElementById("marca").value.trim(),
-                modelo: document.getElementById("modelo").value.trim(),
-                serie: document.getElementById("serie").value.trim(),
-                motivo: document.getElementById("motivo").value.trim(),
-                tipoTrabajo: document.getElementById("tipoTrabajo").value.trim(),
-                presupuesto: document.getElementById("presupuesto").value.trim(),
-                horaInicio: document.getElementById("horaInicio").value.trim(),
-                horaFin: document.getElementById("horaFin").value.trim(),
-                fechaInicio: document.getElementById("inicio").value.trim(),
-                fechaFin: document.getElementById("fin").value.trim(),
-                //diasT: document.getElementById("diasT").value.trim(),
-                servicio: document.getElementById("destrabajo").value.trim(),
-                obs: document.getElementById("obs").value.trim(),
-                recibido: document.getElementById("recibido").value.trim(),
-                firma: signaturePad1.isEmpty() ? '' : signaturePad1.toDataURL('image/png'),
-                firmaT: signaturePad2.isEmpty() ? '' : signaturePad2.toDataURL('image/png'),
-                condicion: document.getElementById("condicion").value.trim(),
-                repuestos: document.getElementById("repuestos").value.trim(),
-                status: 'activo'
-               
-            
-            };
+    
+
+
+        async function guardarInforme(){
+
+        const payload = {
+            cliente: document.getElementById("clienteSelect").value.trim(),
+             
+            tecnicos: obtenerTecnicosSeleccionados(),
+            equipo: document.getElementById("equipo").value.trim(),
+            marca: document.getElementById("marca").value.trim(),
+            modelo: document.getElementById("modelo").value.trim(),
+            serie: document.getElementById("serie").value.trim(),
+            motivo: document.getElementById("motivoVisita").value.trim(),
+            tipoTrabajo: document.getElementById("tipoTrabajo").value.trim(),
+            presupuesto: document.getElementById("presupuesto").value.trim(),
+            horaInicio: document.getElementById("horaInicio").value.trim(),
+            horaFin: document.getElementById("horaFin").value.trim(),
+            fechaInicio: document.getElementById("fechaInicio").value.trim(),
+            fechaFin: document.getElementById("fechaFin").value.trim(),
+            servicio: document.getElementById("servicio").value.trim(),
+            obs: document.getElementById("obs").value.trim(),
+            recibido: document.getElementById("recibido").value.trim(),
+            firma: signaturePad1.isEmpty() ? '' : signaturePad1.toDataURL('image/png'),
+            firmaT: signaturePad2.isEmpty() ? '' : signaturePad2.toDataURL('image/png'),
+            repuestos: document.getElementById("repuestos").value.trim(),
+            status: document.getElementById("status").value.trim(),
+        };
             
 
             console.log("payload:", payload);
@@ -421,13 +415,53 @@ document.addEventListener("DOMContentLoaded", () => {
                 console.log('datos enviados:', JSON.stringify(payload));
 
                 const data = await res.json();
-                console.log("Informe guardado:", data);
-                console.log('ID del informe:', data.informeId);
-                              
-                
-                 return data;
+                console.log("RESPUESTA COMPLETA:", data);
 
-        } 
+                const resultado = data.resultado;
+                const informeGuardado = resultado.informeGuardado;
+                const cloudinary = resultado.cloudinary;
+                const pdf = resultado.pdf;
+                const correo = resultado.correo.correo;
+                const informe = resultado.informe; 
+
+                console.log("Informe guardado:", informeGuardado);
+
+                console.log("Cloudinary:", cloudinary.ok);
+
+                console.log("PDF:", pdf.ok);
+
+                console.log("Resultado correo:", correo);
+
+                console.log("Número:", informe.numero);
+
+                console.log("Cliente:", informe.cliente);
+
+                console.log("ID:", informe.id);
+
+                let mensaje = "";
+
+            if (resultado.informeGuardado) {
+                mensaje += "✅ Informe guardado correctamente.\n";
+            }
+
+            if (resultado.cloudinary?.ok) {
+            mensaje += "✅ Fotos subidas a Cloudinary correctamente.\n";
+            }
+
+            if (resultado.pdf?.ok) {
+            mensaje += "✅ PDF generado correctamente.\n";
+            }
+
+            if (correo?.estado === "exito") {
+            mensaje += "✅ Correos enviados correctamente.\n";
+            }
+
+            alert(mensaje);
+                              
+          return data;      
+                 
+        
+        } //fin guardarInforme()
         
     async function subirUnaImagen(informeId,file, tipo, index) {
         console.log("estoy dentro de subirUnaImagen");
